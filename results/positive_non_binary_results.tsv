@@ -1,0 +1,13 @@
+Mean	SD	posextract__words_replace	posextract__expand_top_n	tokeniser__tokeniser_func	posextract__expand	tokeniser__ngram_range	posextract__replacement	count_grams__binary	clf__C	posextract__disimlar	clf__epsilon 
+0.607435139173	0.0567774971055	Excellent word	10	unitok_tokens	Word2Vec(vocab=38074, size=300, alpha=0.025)	(1, 2)	posword	False	0.1	Poor word	0.01
+0.606956902685	0.0568589272417	Excellent word	20	unitok_tokens	Word2Vec(vocab=38074, size=300, alpha=0.025)	(1, 2)	posword	False	0.1	Poor word	0.01
+0.60229473303	0.0538892840306	Excellent word	50	unitok_tokens	Word2Vec(vocab=38074, size=300, alpha=0.025)	(1, 2)	posword	False	0.1	Poor word	0.01
+0.607503313284	0.0567919458456	Excellent word	10	unitok_tokens	None	(1, 2)	posword	False	0.1	Poor word	0.01
+0.607506147244	0.0567885050361	Excellent word	20	unitok_tokens	None	(1, 2)	posword	False	0.1	Poor word	0.01
+0.607501794535	0.0567916500399	Excellent word	50	unitok_tokens	None	(1, 2)	posword	False	0.1	Poor word	0.01
+0.609004663605	0.0551313102543	Excellent word	10	unitok_tokens	Word2Vec(vocab=38074, size=300, alpha=0.025)	(1, 2)	posword	False	0.1	None	0.01
+0.60715963319	0.0565465318846	Excellent word	20	unitok_tokens	Word2Vec(vocab=38074, size=300, alpha=0.025)	(1, 2)	posword	False	0.1	None	0.01
+0.587163338804	0.0581980728061	Excellent word	50	unitok_tokens	Word2Vec(vocab=38074, size=300, alpha=0.025)	(1, 2)	posword	False	0.1	None	0.01
+0.607504174822	0.0567924567295	Excellent word	10	unitok_tokens	None	(1, 2)	posword	False	0.1	None	0.01
+0.607501838682	0.0567927619817	Excellent word	20	unitok_tokens	None	(1, 2)	posword	False	0.1	None	0.01
+0.60750663804	0.0567893616347	Excellent word	50	unitok_tokens	None	(1, 2)	posword	False	0.1	None	0.01

@@ -1,0 +1,9 @@
+Mean	SD	posextract__expand_top_n	compextract__words_replace	clf__C	compextract__replacement	negextract__words_replace	posextract__replacement	count_grams__binary	tokeniser__ngram_range	negextract__replacement	negextract__expand_top_n	negextract__expand	tokeniser__tokeniser_func	posextract__words_replace	posextract__expand	clf__epsilon 
+0.606043979262	0.0455388996554	10	train companies	0.1	companyname	Poor word	posword	True	(1, 1)	negword	10	Word2Vec(vocab=38074, size=300, alpha=0.025)	unitok_tokens	Excellent word	Word2Vec(vocab=38074, size=300, alpha=0.025)	0.01
+0.505538793702	0.0529009115401	10	train companies	0.1	companyname	Poor word	posword	True	(2, 2)	negword	10	Word2Vec(vocab=38074, size=300, alpha=0.025)	unitok_tokens	Excellent word	Word2Vec(vocab=38074, size=300, alpha=0.025)	0.01
+0.604377486973	0.0463418879941	10	train companies	0.1	companyname	Poor word	posword	True	(1, 1)	negword	10	Word2Vec(vocab=38074, size=300, alpha=0.025)	unitok_tokens	Excellent word	None	0.01
+0.505806824558	0.053060123575	10	train companies	0.1	companyname	Poor word	posword	True	(2, 2)	negword	10	Word2Vec(vocab=38074, size=300, alpha=0.025)	unitok_tokens	Excellent word	None	0.01
+0.60574047322	0.045307751911	10	train companies	0.1	companyname	Poor word	posword	True	(1, 1)	negword	10	None	unitok_tokens	Excellent word	Word2Vec(vocab=38074, size=300, alpha=0.025)	0.01
+0.505365404144	0.0529274225642	10	train companies	0.1	companyname	Poor word	posword	True	(2, 2)	negword	10	None	unitok_tokens	Excellent word	Word2Vec(vocab=38074, size=300, alpha=0.025)	0.01
+0.60440715115	0.045185512181	10	train companies	0.1	companyname	Poor word	posword	True	(1, 1)	negword	10	None	unitok_tokens	Excellent word	None	0.01
+0.504534950395	0.0534375548676	10	train companies	0.1	companyname	Poor word	posword	True	(2, 2)	negword	10	None	unitok_tokens	Excellent word	None	0.01

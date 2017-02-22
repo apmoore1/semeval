@@ -1,0 +1,2 @@
+Mean	SD	clf__C	compextract__replacement	tokeniser__ngram_range	clf__epsilon	compextract__expand	count_grams__binary	tokeniser__tokeniser_func	compextract__words_replace 
+0.612879160026	0.048769535686	0.1	companyname	(1, 2)	0.01	None	True	unitok_tokens	train companies

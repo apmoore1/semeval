@@ -1,0 +1,2 @@
+Mean	SD	union__ngrams__tokeniser__tokeniser_func	clf__C	union__target_extract__count_grams__binary	union__target_extract__aspect__feature	union__ngrams__tokeniser__ngram_range	union__ngrams__count_grams__binary	union__ngrams__text_extract__feature	clf__epsilon 
+0.607932943811	0.0561589490606	unitok_tokens	0.1	True	aspects	(1, 2)	True	text	0.01

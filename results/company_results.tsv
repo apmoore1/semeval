@@ -1,0 +1,7 @@
+Mean	SD	compextract__expand_top_n	tokeniser__tokeniser_func	clf__epsilon	compextract__replacement	compextract__words_replace	compextract__expand	tokeniser__ngram_range	clf__C	count_grams__binary 
+0.604230955727	0.0569015439258	10	unitok_tokens	0.01	companyname	train companies	Word2Vec(vocab=38074, size=300, alpha=0.025)	(1, 2)	0.1	True
+0.581606194343	0.0485134563009	20	unitok_tokens	0.01	companyname	train companies	Word2Vec(vocab=38074, size=300, alpha=0.025)	(1, 2)	0.1	True
+0.507562261043	0.0408119404872	50	unitok_tokens	0.01	companyname	train companies	Word2Vec(vocab=38074, size=300, alpha=0.025)	(1, 2)	0.1	True
+0.612876048812	0.0487729965826	10	unitok_tokens	0.01	companyname	train companies	None	(1, 2)	0.1	True
+0.612877128022	0.0487667496197	20	unitok_tokens	0.01	companyname	train companies	None	(1, 2)	0.1	True
+0.61287785048	0.0487699633532	50	unitok_tokens	0.01	companyname	train companies	None	(1, 2)	0.1	True

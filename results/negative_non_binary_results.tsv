@@ -1,0 +1,13 @@
+Mean	SD	clf__epsilon	negextract__disimlar	negextract__replacement	negextract__words_replace	count_grams__binary	tokeniser__tokeniser_func	negextract__expand	negextract__expand_top_n	tokeniser__ngram_range	clf__C 
+0.606932835515	0.0572664198373	0.01	Excellent word	negword	Poor word	False	unitok_tokens	Word2Vec(vocab=38074, size=300, alpha=0.025)	10	(1, 2)	0.1
+0.603473141093	0.0583900992444	0.01	Excellent word	negword	Poor word	False	unitok_tokens	Word2Vec(vocab=38074, size=300, alpha=0.025)	20	(1, 2)	0.1
+0.587095166556	0.0421058921385	0.01	Excellent word	negword	Poor word	False	unitok_tokens	Word2Vec(vocab=38074, size=300, alpha=0.025)	50	(1, 2)	0.1
+0.607500162142	0.0567948527421	0.01	Excellent word	negword	Poor word	False	unitok_tokens	None	10	(1, 2)	0.1
+0.607503881791	0.056789486202	0.01	Excellent word	negword	Poor word	False	unitok_tokens	None	20	(1, 2)	0.1
+0.607502719445	0.0567950503921	0.01	Excellent word	negword	Poor word	False	unitok_tokens	None	50	(1, 2)	0.1
+0.608918442266	0.0565246485687	0.01	None	negword	Poor word	False	unitok_tokens	Word2Vec(vocab=38074, size=300, alpha=0.025)	10	(1, 2)	0.1
+0.601893148712	0.05285693144	0.01	None	negword	Poor word	False	unitok_tokens	Word2Vec(vocab=38074, size=300, alpha=0.025)	20	(1, 2)	0.1
+0.547411026606	0.0630991733742	0.01	None	negword	Poor word	False	unitok_tokens	Word2Vec(vocab=38074, size=300, alpha=0.025)	50	(1, 2)	0.1
+0.607499402083	0.0567913779542	0.01	None	negword	Poor word	False	unitok_tokens	None	10	(1, 2)	0.1
+0.607502795041	0.0567913471659	0.01	None	negword	Poor word	False	unitok_tokens	None	20	(1, 2)	0.1
+0.60750321375	0.056787685903	0.01	None	negword	Poor word	False	unitok_tokens	None	50	(1, 2)	0.1
