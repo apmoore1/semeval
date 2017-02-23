@@ -134,4 +134,4 @@ suggested they were good and also I didn't have time to experiment with differen
 
 ## License
 
-[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
