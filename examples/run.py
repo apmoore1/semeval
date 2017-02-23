@@ -1,7 +1,7 @@
 import os
 import sys
 
-sys.path.append(os.getcwd())
+sys.path.append(os.path.abspath(os.pardir))
 
 from semeval.lstms.EarlyStoppingLSTM import EarlyStoppingLSTM
 from semeval.lstms.TweekedLSTM import TweekedLSTM
@@ -32,7 +32,7 @@ svr_clf = svr_grid_clf.best_estimator_
 
 # Example of how to report the best parameter results found using the
 # grid search this can only be done on the SVR which return a Grid Search.
-helper.stats_report(svr_grid_clf, './results/all_clf_results.tsv')
+helper.stats_report(svr_grid_clf, '../results/all_clf_results.tsv')
 
 # This finds the top 50 errors by default. error_details
 svr_error_details, svr_error_dist = helper.error_analysis(train_texts, train_sentiments,
@@ -44,7 +44,7 @@ aspect_train_data = [{'text':train_texts[i], 'aspects': train_companies[i]}
                      for i in range(len(train_texts))]
 aspect_grid_clf = aspect_finsvr.train(aspect_train_data, train_sentiments)
 aspect_clf = aspect_grid_clf.best_estimator_
-helper.stats_report(aspect_grid_clf, './results/comp_aspect_clf_results.tsv')
+helper.stats_report(aspect_grid_clf, '../results/comp_aspect_clf_results.tsv')
 asp_error_details, asp_error_dist = helper.error_analysis(aspect_train_data, train_sentiments,
                                                           train_companies, aspect_clf,
                                                           train_text=train_texts)

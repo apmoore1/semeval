@@ -22,8 +22,8 @@ dataset.
 
 ## How to use the code base
 
-Quick example of all the main features of this code base can be found in the
-[run file](./run.py) NOTE that this may take a long time to run with respect to the LSTM's.
+Quick example of all the main features of this code base can be found within the examples folder
+in the [run file](./examples/run.py) NOTE that this may take a long time to run with respect to the LSTM's.
 
 ## SVR's
 

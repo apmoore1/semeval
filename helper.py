@@ -398,3 +398,31 @@ def error_analysis(train_data, train_values, train_comps, clf, train_text=False,
     error_details = sent_type_errors(top_errors, compcount_id)
     error_distribution = {k : len(v) for k, v in error_details.items()}
     return error_details, error_distribution
+
+def eval_func(test_data, pred_data):
+
+    all_vals = []
+    title_id = {}
+    for i in range(len(test_data)):
+        data = test_data[i]
+        ids = title_id.get(data['title'], [])
+        ids.append(i)
+        title_id[data['title']] = ids
+    for _, ids in title_id.items():
+
+        pred_sent_scores = []
+        test_sent_scores = []
+        for a_id in ids:
+            pred_value = pred_data[a_id]['sentiment score']
+            test_value = test_data[a_id]['sentiment score']
+
+            pred_sent_scores.append(pred_value)
+            test_sent_scores.append(test_value)
+        cosine_value = cosine_score(numpy.asarray(pred_sent_scores),
+                                    numpy.asarray(test_sent_scores))
+        if numpy.isnan(cosine_value):
+            all_vals.append(0)
+        else:
+            all_vals.append(cosine_value)
+
+    return sum(all_vals) / len(all_vals)
