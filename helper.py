@@ -399,7 +399,28 @@ def error_analysis(train_data, train_values, train_comps, clf, train_text=False,
     error_distribution = {k : len(v) for k, v in error_details.items()}
     return error_details, error_distribution
 
+def eval_format(title_list, sentiment_list):
+    '''Given a list of strings and a list of floats it will convert them into
+    a list of dicts so that they can be a parameter in the eval_func.
+
+    list of strings, list of floats -> list of dicts
+    '''
+
+    assert len(title_list) == len(sentiment_list), 'The two list have to be of the same length'
+
+    return [{'title' : title_list[i], 'sentiment score' : sentiment_list} for
+            i in range(len(title_list))]
+
 def eval_func(test_data, pred_data):
+    '''Takes a list of dicts where each dict contains two keys:
+    'sentiment score' - a float value
+    'title' - a string
+    The function finds the mean cosine similarity between each titles sentiment values.
+    (A title can have more than one sentiment value associated with it if it has more
+    than one company mentioned.)
+
+    List of dicts, list of dicts -> float
+    '''
 
     all_vals = []
     title_id = {}
