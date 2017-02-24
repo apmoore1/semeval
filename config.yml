@@ -3,7 +3,7 @@ models:
 data:
     fin_data:
         train_data: data/finance/Headline_Trainingdata.json
-        test_data: data/finance/Headlines_Testdata.json
+        test_data: data/finance/Headlines_Testdata_withscores.json
         trail_data: data/finance/Headline_Trialdata.json
 submitted_data:
     early_stopping: final_output/early_stopping_submission.json

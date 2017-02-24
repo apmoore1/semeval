@@ -24,7 +24,7 @@ def __read_config():
     Void -> dict
     '''
 
-    with open('config.yml', 'r') as fp:
+    with open(os.path.join(__root_path(), 'config.yml'), 'r') as fp:
         return yaml.load(fp.read())
 
 def __root_path():
@@ -212,6 +212,8 @@ def __text_sentiment_company(all_data):
         # This field does not exist in test dataset
         if 'sentiment' in data:
             sentiment.append(data['sentiment'])
+        elif 'sentiment score' in data:
+            sentiment.append(data['sentiment score'])
     return text, numpy.asarray(sentiment), company
 
 def fin_data(data_type):
@@ -277,6 +279,18 @@ def stats_report(clf, f_name):
                     param_values.append(convert_value(value))
             fp.write("{}\t{}\t{}\n".format(str(mean), str(std), '\t'.join(param_values)))
 
+def pred_true_diff(pred_values, true_values, score_function, mapping=None):
+    results = []
+
+    for i in range(len(pred_values)):
+        mapped_value = i
+        # This is to support both lists and numpy arrays
+        if hasattr(mapping,'__index__') or hasattr(mapping, 'index'):
+            mapped_value = mapping[i]
+        results.append((mapped_value, pred_values[i],
+                       score_function([pred_values[i]], [true_values[i]])))
+    return results
+
 def error_cross_validate(train_data, train_values, model, n_folds=10,
                          shuffle=True, score_function=mean_absolute_error):
     '''Given the training data and true values for that data both a list and
@@ -301,11 +315,8 @@ def error_cross_validate(train_data, train_values, model, n_folds=10,
         predicted_values = model.predict(train_data_array[test])
         real_values = train_values_array[test]
 
-        for i in range(len(predicted_values)):
-            pred_value = [predicted_values[i]]
-            real_value = [real_values[i]]
-            results.append((test[i], pred_value[0],
-                            score_function(pred_value, real_value)))
+        results.extend(pred_true_diff(predicted_values, real_values,
+                                      score_function, mapping=test))
     return results
 
 
@@ -374,8 +385,7 @@ def sent_type_errors(top_errors, compscount_ids):
         comps_errors[comp_count] = errors
     return comps_errors
 
-def error_analysis(train_data, train_values, train_comps, clf, train_text=False,
-                   num_errors=50, n_folds=10, shuffle=True,
+def error_analysis(data, values, comps, clf, text=False, cv=None, num_errors=50,
                    score_function=mean_absolute_error):
     '''A wrapper function arround the following methods:
     comps2sent
@@ -383,18 +393,34 @@ def error_analysis(train_data, train_values, train_comps, clf, train_text=False,
     top_n_errors
     sent_type_errors
 
+    CV indicated weather or not to do the error analysis as cross validation over
+    the training or validating dataset. If so this value has to be set to True
+    or a dict of Key Word arguments to error_cross_validate method if you would
+    like to change any of the default settings.
+    Default is None and assumes that you are doing error analysis on the test set.
+
+
     returns tuple of dict, dict
     '''
 
     compcount_id = None
-    if train_text:
-        compcount_id = comps2sent(train_text, train_comps)
+    if text:
+        compcount_id = comps2sent(text, comps)
     else:
-        compcount_id = comps2sent(train_data, train_comps)
-    error_results = error_cross_validate(train_data, train_values, clf, n_folds=n_folds,
-                                         shuffle=shuffle, score_function=score_function)
-    top_errors = top_n_errors(error_results, train_data, train_values,
-                              train_comps, n=num_errors)
+        compcount_id = comps2sent(data, comps)
+    error_results = None
+    if cv:
+        if isinstance(cv, dict):
+            error_results = error_cross_validate(data, values, clf,
+                                                 score_function=score_function, **cv)
+        else:
+            error_results = error_cross_validate(data, values, clf,
+                                                 score_function=score_function)
+    else:
+        pred_values = clf.predict(data)
+        error_results = pred_true_diff(pred_values, values, score_function)
+    top_errors = top_n_errors(error_results, data, values,
+                              comps, n=num_errors)
     error_details = sent_type_errors(top_errors, compcount_id)
     error_distribution = {k : len(v) for k, v in error_details.items()}
     return error_details, error_distribution
@@ -408,7 +434,7 @@ def eval_format(title_list, sentiment_list):
 
     assert len(title_list) == len(sentiment_list), 'The two list have to be of the same length'
 
-    return [{'title' : title_list[i], 'sentiment score' : sentiment_list} for
+    return [{'title' : title_list[i], 'sentiment score' : sentiment_list[i]} for
             i in range(len(title_list))]
 
 def eval_func(test_data, pred_data):
