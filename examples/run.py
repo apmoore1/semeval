@@ -58,8 +58,7 @@ asp_error_details, asp_error_dist = helper.error_analysis(aspect_test_data, test
 pred_values = helper.eval_format(test_texts, aspect_clf.predict(aspect_test_data))
 print(helper.cosine_score(test_sentiments,  aspect_clf.predict(aspect_test_data)))
 print(helper.eval_func(true_values, pred_values))
-import code
-code.interact(local=locals())
+
 ###
 #   The following is examples of how to train the LSTM's and use the same
 #   error analysis. Also how to show the cross validation results.
