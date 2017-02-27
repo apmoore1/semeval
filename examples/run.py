@@ -34,7 +34,7 @@ svr_clf = svr_grid_clf.best_estimator_
 
 # Example of how to report the best parameter results found using the
 # grid search this can only be done on the SVR which return a Grid Search.
-helper.stats_report(svr_grid_clf, '../results/all_clf_results.tsv')
+helper.stats_report(svr_grid_clf, '../results/best_clf_results.tsv')
 
 # This finds the top 50 errors by default within the test data.
 svr_error_details, svr_error_dist = helper.error_analysis(test_texts, test_sentiments,
@@ -51,14 +51,15 @@ aspect_test_data = [{'text':test_texts[i], 'aspects': test_companies[i]}
                      for i in range(len(test_texts))]
 aspect_grid_clf = aspect_finsvr.train(aspect_train_data, train_sentiments)
 aspect_clf = aspect_grid_clf.best_estimator_
-helper.stats_report(aspect_grid_clf, '../results/comp_aspect_clf_results.tsv')
+helper.stats_report(aspect_grid_clf, '../results/best_aspect_clf_results.tsv')
 asp_error_details, asp_error_dist = helper.error_analysis(aspect_test_data, test_sentiments,
                                                           test_companies, aspect_clf,
                                                           text=test_texts)
 pred_values = helper.eval_format(test_texts, aspect_clf.predict(aspect_test_data))
 print(helper.cosine_score(test_sentiments,  aspect_clf.predict(aspect_test_data)))
 print(helper.eval_func(true_values, pred_values))
-
+import code
+code.interact(local=locals())
 ###
 #   The following is examples of how to train the LSTM's and use the same
 #   error analysis. Also how to show the cross validation results.
