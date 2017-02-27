@@ -70,23 +70,25 @@ early_lstm = EarlyStoppingLSTM(fin_word2vec_model)
 
 # Get the 10 fold cross validation results
 early_res = early_lstm.cross_validate(train_texts, train_sentiments)
-# Error analysis just like the SVR's
-early_error_details, svr_error_dist = helper.error_analysis(train_texts, train_sentiments,
-                                                            train_companies, early_lstm)
+
+
+early_lstm.fit(train_texts, train_sentiments)
+early_error_details, early_error_dist = helper.error_analysis(test_texts, test_sentiments,
+                                                            test_companies, early_lstm)
 
 # Train the LSTM model over all the training data
-early_lstm.fit(train_texts, train_sentiments)
+
 pred_values = helper.eval_format(test_texts, early_lstm.predict(test_texts))
 print(helper.cosine_score(test_sentiments,  early_lstm.predict(test_texts)))
 print(helper.eval_func(true_values, pred_values))
 
-
 tweeked_lstm = TweekedLSTM(fin_word2vec_model)
 tweeked_res = tweeked_lstm.cross_validate(train_texts, train_sentiments)
-tweek_error_details, svr_error_dist = helper.error_analysis(train_texts, train_sentiments,
-                                                            train_companies, tweeked_lstm)
-
 tweeked_lstm.fit(train_texts, train_sentiments)
+tweek_error_details, tweek_error_dist = helper.error_analysis(test_texts, test_sentiments,
+                                                            test_companies, tweeked_lstm)
+
+
 pred_values = helper.eval_format(test_texts, tweeked_lstm.predict(test_texts))
 print(helper.cosine_score(test_sentiments,  tweeked_lstm.predict(test_texts)))
 print(helper.eval_func(true_values, pred_values))
