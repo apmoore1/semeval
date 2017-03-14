@@ -51,7 +51,9 @@ written.
 
 ## LSTM's
 
-There are two LSTM's both sub class [LSTMModel](./lstms/LSTMModel.py).
+There are two LSTM's both sub class [LSTMModel](./lstms/LSTMModel.py). Note that
+in the paper the standard LSTM is called the Tweeked LSTM in the code base sorry for any 
+confusion.
 
 [Early Stopping LSTM](./lstms/EarlyStoppingLSTM.py) as the name suggests does not have a set number of times
 that it iterates over the training data instead it stops based on the number of
@@ -115,7 +117,8 @@ just default parameters:
 
 gensim.models.Word2Vec(sentences=self, min_count=40, workers=4, window=10, sample=1e-3, size=300)
 
-tokens = 161,877,425
+number of articles = 189, 206
+tokens = 161, 877, 425
 number of sections used - 567071
 
 They are a collection of financial news articles such as:

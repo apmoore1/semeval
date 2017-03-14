@@ -1,2 +1,0 @@
-Mean	SD	clf__epsilon	clf__C	union__comp_names__count_grams__binary	union__comp_names__tokeniser__ngram_range	union__comp_names__tokeniser__tokeniser_func	union__ngrams__tokeniser__tokeniser_func	union__comp_names__word_extract__word2extract	union__ngrams__count_grams__binary	union__ngrams__tokeniser__ngram_range 
-0.600564724803	0.056514678715	0.01	0.1	True	(1, 2)	unitok_tokens	unitok_tokens	train companies	True	(1, 2)

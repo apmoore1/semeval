@@ -18,6 +18,11 @@ def train(train_data, train_sentiments, n_jobs=-1, n_cv=10,
 
     train_comp_names = ('train companies', [data['aspects'] for data in train_data])
 
+    pos_word = ('Excellent word', ['excellent'])
+    neg_word = ('Poor word', ['poor'])
+
+    fin_word2vec_model = helper.fin_word_vector()
+
     union_parameters = {
         'union__ngrams__tokeniser__ngram_range' : [(1,2)],
         'union__ngrams__tokeniser__tokeniser_func' : [helper.unitok_tokens],
@@ -25,6 +30,14 @@ def train(train_data, train_sentiments, n_jobs=-1, n_cv=10,
         'union__ngrams__compextract__words_replace' : [train_comp_names],
         'union__ngrams__compextract__replacement' : ['companyname'],
         'union__ngrams__compextract__expand' : [None],
+        'union__ngrams__posextract__words_replace' : [pos_word],
+        'union__ngrams__posextract__replacement' : ['posword'],
+        'union__ngrams__posextract__expand' : [fin_word2vec_model],
+        'union__ngrams__posextract__expand_top_n' : [10],
+        'union__ngrams__negextract__words_replace' : [neg_word],
+        'union__ngrams__negextract__replacement' : ['negword'],
+        'union__ngrams__negextract__expand' : [fin_word2vec_model],
+        'union__ngrams__negextract__expand_top_n' : [10],
         'union__ngrams__count_grams__binary' : [True],
         'union__target_extract__aspect__feature' : ['aspects'],
         'union__target_extract__count_grams__binary': [True],
@@ -38,6 +51,8 @@ def train(train_data, train_sentiments, n_jobs=-1, n_cv=10,
                 ('text_extract', FeatureExtractor()),
                 ('tokeniser', Tokeniser()),
                 ('compextract', WordReplacement()),
+                ('posextract', WordReplacement()),
+                ('negextract', WordReplacement()),
                 ('count_grams', CountVectorizer(analyzer=helper.analyzer))
             ])),
             ('target_extract', Pipeline([

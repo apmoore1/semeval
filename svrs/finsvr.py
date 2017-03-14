@@ -16,16 +16,10 @@ def train(train_text, train_sentiments, n_jobs=-1, n_cv=10,
     _, _, train_comp_names = helper.fin_data('train')
     train_comp_names = ('train companies', train_comp_names)
 
+    pos_word = ('Excellent word', ['excellent'])
+    neg_word = ('Poor word', ['poor'])
 
-    ####
-    #    Other example configurations that did not perform as well on the
-    #    SEMEval 2017 task 5 track 2 datasets but may be useful for other
-    #    tasks/datasets
-    ####
-    #pos_word = ('Excellent word', ['excellent'])
-    #neg_word = ('Poor word', ['poor'])
-
-    #fin_word2vec_model = helper.fin_word_vector()
+    fin_word2vec_model = helper.fin_word_vector()
 
     parameters = {
         'tokeniser__ngram_range' : [(1,2)],
@@ -33,17 +27,14 @@ def train(train_text, train_sentiments, n_jobs=-1, n_cv=10,
         'compextract__words_replace' : [train_comp_names],
         'compextract__replacement' : ['companyname'],
         'compextract__expand' : [None],
-        #'compextract__expand_top_n' : [10],
-        #'posextract__words_replace' : [pos_word],
-        #'posextract__disimlar' : [neg_word, ('None', [])],
-        #'posextract__replacement' : ['posword'],
-        #'posextract__expand' : [fin_word2vec_model, None],
-        #'posextract__expand_top_n' : [10],
-        #'negextract__words_replace' : [neg_word],
-        #'negextract__disimlar' : [pos_word, ('None', [])],
-        #'negextract__replacement' : ['negword'],
-        #'negextract__expand' : [fin_word2vec_model, None],
-        #'negextract__expand_top_n' : [10],
+        'posextract__words_replace' : [pos_word],
+        'posextract__replacement' : ['posword'],
+        'posextract__expand' : [fin_word2vec_model],
+        'posextract__expand_top_n' : [10],
+        'negextract__words_replace' : [neg_word],
+        'negextract__replacement' : ['negword'],
+        'negextract__expand' : [fin_word2vec_model],
+        'negextract__expand_top_n' : [10],
         'count_grams__binary' : [True],
         'clf__C' : [0.1],
         'clf__epsilon' : [0.01]
@@ -53,8 +44,8 @@ def train(train_text, train_sentiments, n_jobs=-1, n_cv=10,
     pipeline = Pipeline([
         ('tokeniser', Tokeniser()),
         ('compextract', WordReplacement()),
-        #('posextract', WordReplacement()),
-        #('negextract', WordReplacement()),
+        ('posextract', WordReplacement()),
+        ('negextract', WordReplacement()),
         ('count_grams', CountVectorizer(analyzer=helper.analyzer)),
         ('clf', svm.LinearSVR())
     ])

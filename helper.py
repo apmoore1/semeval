@@ -1,6 +1,7 @@
 import json
 import os
 
+
 import unitok.configs.english
 from unitok import unitok as tok
 
@@ -385,6 +386,9 @@ def sent_type_errors(top_errors, compscount_ids):
         comps_errors[comp_count] = errors
     return comps_errors
 
+def error_dist(comps_ids):
+    return {k : len(v) for k, v in comps_ids.items()}
+
 def error_analysis(data, values, comps, clf, text=False, cv=None, num_errors=50,
                    score_function=mean_absolute_error):
     '''A wrapper function arround the following methods:
@@ -422,7 +426,7 @@ def error_analysis(data, values, comps, clf, text=False, cv=None, num_errors=50,
     top_errors = top_n_errors(error_results, data, values,
                               comps, n=num_errors)
     error_details = sent_type_errors(top_errors, compcount_id)
-    error_distribution = {k : len(v) for k, v in error_details.items()}
+    error_distribution = error_dist(error_details)
     return error_details, error_distribution
 
 def eval_format(title_list, sentiment_list):
