@@ -516,7 +516,7 @@ def eval_func1(test_data, pred_data):
             if numpy.isnan(cosine_value):
                 cosine_value = 0
             all_score = len(pred_sent_scores) * cosine_value
-        if len(pred_sent_scores[0]) == 1:
+        if len(pred_sent_scores) == 1:
             pred_score = pred_sent_scores[0]
             test_score = test_sent_scores[0]
             if pred_score==0 and test_score==0:
