@@ -1,5 +1,6 @@
 import json
 import os
+import math
 
 
 import unitok.configs.english
@@ -515,8 +516,17 @@ def eval_func1(test_data, pred_data):
             if numpy.isnan(cosine_value):
                 cosine_value = 0
             all_score = len(pred_sent_scores) * cosine_value
-        if (pred_sent_scores[0] / test_sent_scores[0]) == 1:
-            all_score = 1 - math.fabs(test_sent_scores[0] - pred_sent_scores[0])
+        if len(pred_sent_scores[0]) == 1:
+            pred_score = pred_sent_scores[0]
+            test_score = test_sent_scores[0]
+            if pred_score==0 and test_score==0:
+                all_score = 1
+            elif test_score==0:
+                pass
+            elif (pred_score / test_score) == 1:
+                all_score = 1 - math.fabs(test_sent_scores[0] - pred_sent_scores[0])
+
+
         all_vals.append(all_score)
 
     return sum(all_vals) / len(all_vals)
