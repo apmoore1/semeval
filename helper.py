@@ -473,3 +473,46 @@ def eval_func(test_data, pred_data):
             all_vals.append(cosine_value)
 
     return sum(all_vals) / len(all_vals)
+
+
+def eval_func1(test_data, pred_data):
+    '''Takes a list of dicts where each dict contains two keys:
+    'sentiment score' - a float value
+    'title' - a string
+    The function finds the mean cosine similarity between each titles sentiment values.
+    (A title can have more than one sentiment value associated with it if it has more
+    than one company mentioned.)
+
+    List of dicts, list of dicts -> float
+    '''
+
+    all_vals = []
+    title_id = {}
+    for i in range(len(test_data)):
+        data = test_data[i]
+        ids = title_id.get(data['title'], [])
+        ids.append(i)
+        title_id[data['title']] = ids
+    for _, ids in title_id.items():
+
+        pred_sent_scores = []
+        test_sent_scores = []
+        for a_id in ids:
+            pred_value = pred_data[a_id]['sentiment score']
+            test_value = test_data[a_id]['sentiment score']
+
+            pred_sent_scores.append(pred_value)
+            test_sent_scores.append(test_value)
+
+        all_score = 0
+        if len(pred_sent_scores) > 1:
+            cosine_value = cosine_score(numpy.asarray(pred_sent_scores),
+                                        numpy.asarray(test_sent_scores))
+            if numpy.isnan(cosine_value):
+                cosine_value = 0
+            all_score = len(pred_sent_scores) * cosine_value
+        if (pred_sent_scores[0] / test_sent_scores[0]) == 1:
+            all_score = 1 - math.fabs(test_sent_scores[0] - pred_sent_scores[0])
+        all_vals.append(all_score)
+
+    return sum(all_vals) / len(all_vals)
