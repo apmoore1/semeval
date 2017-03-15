@@ -40,8 +40,9 @@ helper.stats_report(svr_grid_clf, '../results/best_clf_results.tsv')
 svr_error_details, svr_error_dist = helper.error_analysis(test_texts, test_sentiments,
                                                           test_companies, svr_clf)
 pred_values = helper.eval_format(test_texts, svr_clf.predict(test_texts))
-print(helper.cosine_score(test_sentiments,  svr_clf.predict(test_texts)))
-print(helper.eval_func(true_values, pred_values))
+print('Metric 1 {}'.format(helper.eval_func(true_values, pred_values, metric=helper.metric1)))
+print('Metric 2 {}'.format(helper.eval_func(true_values, pred_values, metric=helper.metric2)))
+print('Metric 3 {}'.format(helper.eval_func(true_values, pred_values, metric=helper.metric3)))
 
 
 # Convert the training and testing data into aspect data format for the aspect_finsvr
@@ -56,8 +57,9 @@ asp_error_details, asp_error_dist = helper.error_analysis(aspect_test_data, test
                                                           test_companies, aspect_clf,
                                                           text=test_texts)
 pred_values = helper.eval_format(test_texts, aspect_clf.predict(aspect_test_data))
-print(helper.cosine_score(test_sentiments,  aspect_clf.predict(aspect_test_data)))
-print(helper.eval_func(true_values, pred_values))
+print('Metric 1 {}'.format(helper.eval_func(true_values, pred_values, metric=helper.metric1)))
+print('Metric 2 {}'.format(helper.eval_func(true_values, pred_values, metric=helper.metric2)))
+print('Metric 3 {}'.format(helper.eval_func(true_values, pred_values, metric=helper.metric3)))
 
 ###
 #   The following is examples of how to train the LSTM's and use the same
@@ -79,8 +81,10 @@ early_error_details, early_error_dist = helper.error_analysis(test_texts, test_s
 # Train the LSTM model over all the training data
 
 pred_values = helper.eval_format(test_texts, early_lstm.predict(test_texts))
-print(helper.cosine_score(test_sentiments,  early_lstm.predict(test_texts)))
-print(helper.eval_func(true_values, pred_values))
+
+print('Metric 1 {}'.format(helper.eval_func(true_values, pred_values, metric=helper.metric1)))
+print('Metric 2 {}'.format(helper.eval_func(true_values, pred_values, metric=helper.metric2)))
+print('Metric 3 {}'.format(helper.eval_func(true_values, pred_values, metric=helper.metric3)))
 
 tweeked_lstm = TweekedLSTM(fin_word2vec_model)
 tweeked_res = tweeked_lstm.cross_validate(train_texts, train_sentiments)
@@ -90,8 +94,9 @@ tweek_error_details, tweek_error_dist = helper.error_analysis(test_texts, test_s
 
 
 pred_values = helper.eval_format(test_texts, tweeked_lstm.predict(test_texts))
-print(helper.cosine_score(test_sentiments,  tweeked_lstm.predict(test_texts)))
-print(helper.eval_func(true_values, pred_values))
+print('Metric 1 {}'.format(helper.eval_func(true_values, pred_values, metric=helper.metric1)))
+print('Metric 2 {}'.format(helper.eval_func(true_values, pred_values, metric=helper.metric2)))
+print('Metric 3 {}'.format(helper.eval_func(true_values, pred_values, metric=helper.metric3)))
 
 # Print both LSTM's cross validation results
 avg_tweek_percentage = (sum(tweeked_res) / len(tweeked_res)) * 100

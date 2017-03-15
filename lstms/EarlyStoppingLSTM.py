@@ -57,7 +57,7 @@ class EarlyStoppingLSTM(LSTMModel):
         # Output of this layer is of max_length by max_length * 2 dimension
         # instead of max_length, vector_length
         model.add(Bidirectional(LSTM(max_length, activation='softsign',
-                                     return_sequences=True), name='start'))
+                                     return_sequences=True)))
         model.add(Dropout(0.5))
         model.add(Bidirectional(LSTM(max_length, activation='softsign')))
         model.add(Dropout(0.5))
