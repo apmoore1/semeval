@@ -443,9 +443,24 @@ def eval_format(title_list, sentiment_list):
             i in range(len(title_list))]
 
 def metric1(pred_values, test_values):
+    '''Wrapper for cosine_score, given two lists returns an int.
+
+    Wrapper so that the function name matches the name in the presentation and
+    paper.
+
+    List of ints, List of ints -> int
+    '''
+
     return cosine_score(pred_values, test_values)
 
 def metric2(pred_values, test_values):
+    '''Given two lists finds the similarities between the list using the
+    equation 4 on slide 20 of the presentation at:
+    ./presentation/slides.pdf
+
+    List of ints, List of ints -> int
+    '''
+
     all_score = 0
     cosine_value = cosine_score(numpy.asarray(pred_values),
                                 numpy.asarray(test_values))
@@ -455,6 +470,14 @@ def metric2(pred_values, test_values):
 
 
 def metric3(pred_values, true_values):
+    '''Given two lists finds the similarities between the list using the
+    equation 5 on slide 20 of the presentation at:
+    ./presentation/slides.pdf
+
+
+    List of ints, List of ints -> int
+    '''
+
     all_score = 0
     if len(pred_values) > 1:
         cosine_value = cosine_score(numpy.asarray(pred_values),
@@ -476,9 +499,15 @@ def eval_func(test_data, pred_data, metric=metric3):
     '''Takes a list of dicts where each dict contains two keys:
     'sentiment score' - a float value
     'title' - a string
+
     The function finds the mean cosine similarity between each titles sentiment values.
     (A title can have more than one sentiment value associated with it if it has more
     than one company mentioned.)
+
+    Optional argument:
+    metric - is a function which defines the metric that you would like to use.
+    See the metric functions within this module.
+    Default is metric3
 
     List of dicts, list of dicts -> float
     '''
