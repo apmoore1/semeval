@@ -52,7 +52,7 @@ written.
 ## LSTM's
 
 There are two LSTM's both sub class [LSTMModel](./lstms/LSTMModel.py). Note that
-in the paper the standard LSTM is called the Tweeked LSTM in the code base sorry for any 
+in the paper the standard LSTM is called the Tweeked LSTM in the code base sorry for any
 confusion.
 
 [Early Stopping LSTM](./lstms/EarlyStoppingLSTM.py) as the name suggests does not have a set number of times
@@ -77,27 +77,13 @@ more relevant this was used as it appeared to work well for this task.
 
 Require:
 1. Python 3.4.3 or above.
+2. graphviz
 
-If you would like to visualise the LSTM's then GraphViz is required for Debian based
-systems this can be installed using:
-
-apt-get install graphviz
-
-### Note on [Unitok-3.0.3](./unitok-3.0.3)
-
-I have included unitok-3.0.3 within this project as this project requires a Python 3
-version and the one currently [available](http://corpus.tools/wiki/Unitok) is
-Python 2 only therefore this version is Python 3 only for English.
-
-To install go to [Unitok-3.0.3](./unitok-3.0.3) folder and run:
-
-python3 setup.py install
-
-### All of the other pips
-
-All the other pips can be installed using the following command:
+And the installation of pip's:
 
 pip3 install -r requirements.txt
+
+Also look at the [config file](./config.yml) to see where to put the data.
 
 
 ## [Final output](./final_output)
