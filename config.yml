@@ -2,9 +2,9 @@ models:
     fin_word2vec: models/word2vec_models/all_fin_model_lower
 data:
     fin_data:
-        train_data: data/finance/Headline_Trainingdata.json
-        test_data: data/finance/Headlines_Testdata_withscores.json
-        trail_data: data/finance/Headline_Trialdata.json
+        train_data: ../data/finance/Headline_Trainingdata.json
+        test_data: ../data/finance/Headlines_Testdata_withscores.json
+        trail_data: ../data/finance/Headline_Trialdata.json
 submitted_data:
     early_stopping: final_output/early_stopping_submission.json
     tweeked: final_output/tweeked_lstm_submission.json

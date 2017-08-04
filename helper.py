@@ -26,7 +26,7 @@ def __read_config():
     Void -> dict
     '''
 
-    with open(os.path.join(__root_path(), 'config.yml'), 'r') as fp:
+    with open(os.path.abspath(os.path.join(__root_path(), 'config.yml')), 'r') as fp:
         return yaml.load(fp.read())
 
 def __root_path():
