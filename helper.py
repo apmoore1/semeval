@@ -218,7 +218,39 @@ def __text_sentiment_company(all_data):
             sentiment.append(data['sentiment score'])
     return text, numpy.asarray(sentiment), company
 
-def fin_data(data_type):
+def __text_company(all_data):
+    '''Given a list of dicts will return a tuple of 3 lists containing:
+    1. list of strings lower cased - text data
+    2. list of strings - company names associated to the text data
+    3. list of ints - ids of the test data instance
+
+    list of dicts -> tuple(list of strings, list of strings, list of ints)
+    '''
+
+    text = []
+    company = []
+    ids = []
+    for data in all_data:
+        text.append(data['title'].lower())
+        company.append(data['company'].lower())
+        ids.append(data['id'])
+    return text, company, ids
+def create_semeval_file(ids, predicted_values, file_path):
+    '''
+    Creates a .json file for submission to SemEval given a file path to write
+    the .json data to. Requires the ids from the test data and the predicted scores
+    both as types of lists where the indexs of the ids and the predicted_values
+    are aligned.
+    '''
+
+    output_data = []
+    for index, predicted_value in enumerate(predicted_values):
+        predicted_value = float('{0:.3f}'.format(predicted_value))
+        output_data.append({'id' : ids[index], 'sentiment score' : predicted_value})
+    with open(file_path, 'w') as semeval_file:
+        json.dump(output_data, semeval_file)
+
+def fin_data(data_type, test_data=False):
     '''Given either train, trail or test string as data type will retrieve
     those datasets that were given out in SEMEval task 5 track 2 2017 in the
     format of a tuple containing:
@@ -231,6 +263,8 @@ def fin_data(data_type):
 
     data_path = config_path(['data', 'fin_data', data_type + '_data'])
     with open(data_path, 'r') as fp:
+        if test_data:
+            return __text_company(json.load(fp))
         return __text_sentiment_company(json.load(fp))
 
 def fin_word_vector():
