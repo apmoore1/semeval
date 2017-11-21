@@ -1,4 +1,4 @@
-# Lancaster A [SemEval task 5](http://alt.qcri.org/semeval2017/task5/) track 2 code base. Predicting the sentiment of financial headlines.
+# [Lancaster A SemEval task 5 track 2 code base. Predicting the sentiment of financial headlines.](https://www.aclweb.org/anthology/S17-2095)
 
 The aim of the task was given a financial headline find the sentiment of the
 headline with respect to a particular company that is mentioned in the headline.
